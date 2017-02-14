@@ -2,6 +2,30 @@
 
 {% block container %}
 
-<p>Hello World!</p>
+<div class="row">
+    <h4><i class="fa fa-user-circle"></i> {{ user.username }}</h4>
+</div>
+
+<div class="row">
+    <form class="col s12" action="/question" method="post">
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea id="pergunta" name="pergunta" class="materialize-textarea"></textarea>
+                <label for="pergunta">Nova Pergunta</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <button type="submit" class="waves-effect waves-light btn"><i class="fa fa-check"></i> Enviar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="spacing"></div>
+
+{% block body %}
+
+{% endblock %}
 
 {% endblock %}

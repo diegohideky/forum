@@ -1,4 +1,5 @@
 from resources.db.connection import db
+from resources.models.question import Question
 
 
 def insert(question):
@@ -9,4 +10,12 @@ def insert(question):
 def delete(question):
     db.session.delete(question)
     db.session.commit()
+
+
+def find():
+    return db.session.query(Question).order_by(Question.datetime.desc()).all()
+
+
+def findById(id):
+    return Question.query.get(id)
 

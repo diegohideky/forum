@@ -6,7 +6,8 @@ from functools import wraps
 from flask import Flask, redirect
 from flask.globals import request, session
 from flask.helpers import url_for
-from flask.templating import render_template
+from resources.controllers import loginController, signinController, userController, questionController, \
+    answerController
 from resources.db.connection import db
 from resources.helpers import forum
 
@@ -24,27 +25,57 @@ def login_required(f):
             return f(*args, **kwargs)
         else:
             return redirect(url_for('login'))
+
     return wrap
+
+
+@app.route('/create')
+def create():
+    forum.create()
+    return 'created'
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    return loginController.logout()
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    return loginController.login(request)
+
+
+@app.route('/signin', methods=['GET', 'POST'])
+def signin():
+    return signinController.signin(request)
 
 
 @app.route('/')
 @login_required
 def index():
-  return render_template('pages/index.html')
+    return userController.index()
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-  return render_template('pages/login.html')
+@app.route('/question/<int:id>/answers', methods=['GET', 'POST'])
+@login_required
+def question_answers(id):
+    return questionController.questionAnswers(id, request)
 
 
-@app.route('/create')
-def create():
-  forum.create()
-  return 'created'
+@app.route('/question', methods=['GET', 'POST'])
+@login_required
+def question():
+    return questionController.insert(request)
+
+
+@app.route('/answer/question/<int:id>', methods=['GET', 'POST'])
+@login_required
+def answer_question(id):
+    return answerController.insert(id, request)
 
 
 if __name__ == '__main__':
-  port = int(os.environ.get('PORT', 5000))
-  app.run(host='127.0.0.1', port=port, debug=True)
-
+    port = int(os.environ.get('PORT', 5000))
+    print('App rodando em 127.0.0.1:5000')
+    app.run(host='127.0.0.1', port=port, debug=True)

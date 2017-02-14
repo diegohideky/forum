@@ -12,13 +12,13 @@
     <form class="col s12" action="/login" method="post">
         <div class="row">
             <div class="input-field col m6 s12 offset-m3">
-                <input placeholder="Usuário" id="usuario" type="text" class="validate">
+                <input placeholder="Usuário" id="usuario" name="usuario" type="text" class="validate">
                 <label for="usuario">Usuário</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col m6 s12 offset-m3">
-                <input id="senha" type="password" class="validate">
+                <input id="senha" name="senha" type="password" class="validate">
                 <label for="senha">Senha</label>
             </div>
         </div>
@@ -42,25 +42,25 @@
     <form class="col s12" action="/signin" method="post">
         <div class="row">
             <div class="input-field col m6 s12 offset-m3">
-                <input placeholder="Usuário" id="usuario" type="text" class="validate">
+                <input placeholder="Usuário" id="usuario" name="usuario" type="text" class="validate">
                 <label for="usuario">Usuário</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col m6 s12 offset-m3">
-                <input id="senha" type="password" class="validate">
+                <input id="senha" name="senha" type="password" class="validate">
                 <label for="senha">Senha</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col m6 s12 offset-m3">
-                <input id="senharepete" type="password" class="validate">
+                <input id="senharepete" name="senharepete" type="password" class="validate">
                 <label for="senharepete">Repita a Senha</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col m6 s12 offset-m3">
-                <select>
+                <select id="tipo" name="tipo">
                     <option value="" disabled selected>Escolha o tipo de usuário</option>
                     <option value="Estudante">Estudante</option>
                     <option value="Administrador">Administrador</option>

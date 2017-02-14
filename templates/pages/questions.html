@@ -1,0 +1,29 @@
+{% extends 'pages/index.html' %}
+
+{% block body %}
+
+<div class="row">
+    <h4>Perguntas</h4>
+</div>
+
+<div class="row">
+    {% for question in questions %}
+    <div class="col s12 m12">
+        <div class="card">
+            <div class="card-content">
+                <span class="right">{{ question.datetime.strftime("%d/%m/%Y %H:%M:%S") }}</span>
+                <span class="card-title"><i class="fa fa-user-circle"></i> {{ question.user.username }}</span>
+
+                <p>
+                    {{ question.text }}
+                </p>
+
+            </div>
+            <div class="card-action">
+                <a href="/question/{{ question.id }}/answers">Ver Respostas</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
