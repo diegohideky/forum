@@ -69,6 +69,18 @@ def question():
     return questionController.insert(request)
 
 
+@app.route('/question/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def question_edit(id):
+    return questionController.edit(id, request)
+
+
+@app.route('/question/delete/<int:id>')
+@login_required
+def question_remove(id):
+    return questionController.delete(id)
+
+
 @app.route('/answer/question/<int:id>', methods=['GET', 'POST'])
 @login_required
 def answer_question(id):

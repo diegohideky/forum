@@ -13,7 +13,12 @@
             <div class="card-content">
                 <span class="right">{{ question.datetime.strftime("%d/%m/%Y %H:%M:%S") }}</span>
                 <span class="card-title"><i class="fa fa-user-circle"></i> {{ question.user.username }}</span>
-
+                {% if question.user.id == user.id or user.type == 'Administrador' %}
+                <span class="right">
+                      <a href="/question/edit/{{question.id}}" class="btn-floating btn-large waves-effect waves-light yellow"><i class="fa fa-edit"></i></a>
+                      <a href="/question/delete/{{question.id}}" class="btn-floating btn-large waves-effect waves-light red"><i class="fa fa-remove"></i></a>
+                </span>
+                {% endif %}
                 <p>
                     {{ question.text }}
                 </p>
