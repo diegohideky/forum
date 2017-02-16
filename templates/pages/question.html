@@ -20,16 +20,17 @@
             </div>
             <div class="card-action">
                 <div class="row">
-                    <form class="col s12" action="/answer/question/{{ question.id }}" method="post">
+                    <form class="col s12" action="{% if editAnswer %}/answer/edit/{{ answer.id }}{% else %}/answer/question/{{ question.id }}{% endif %}
+                    " method="post">
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="resposta" name="resposta" class="materialize-textarea"></textarea>
+                                <textarea id="resposta" name="resposta" class="materialize-textarea">{% if editAnswer %}{{ answer.text }}{% endif %}</textarea>
                                 <label for="resposta">Responder</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col s12">
-                                <button type="submit" class="waves-effect waves-light btn"><i class="fa fa-check"></i> Responder</button>
+                                <button type="submit" class="waves-effect waves-light btn"><i class="fa fa-check"></i> {% if editAnswer %}Salvar{% else %}Responder{% endif %}</button>
                             </div>
                         </div>
                     </form>
@@ -39,6 +40,14 @@
                         <div class="col s12">
                             <span class="right">{{ answer.datetime.strftime("%d/%m/%Y %H:%M:%S") }}</span>
                             <p><i class="fa fa-user-circle"></i> {{ answer.user.username }}</p>
+
+                            {% if question.user.id == user.id or user.type == 'Administrador' %}
+                            <span class="right">
+                                  <a href="/answer/edit/{{answer.id}}" class="btn-floating btn-large waves-effect waves-light yellow"><i class="fa fa-edit"></i></a>
+                                  <a href="/answer/delete/{{answer.id}}" class="btn-floating btn-large waves-effect waves-light red"><i class="fa fa-remove"></i></a>
+                            </span>
+                            {% endif %}
+
                             <p>{{ answer.text }}</p>
                         </div>
                     </div>

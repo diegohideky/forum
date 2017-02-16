@@ -37,4 +37,9 @@ def questionAnswers(id, request):
     return render_template('pages/question.html', question=question, user=user)
 
 
+def myQuestions():
+    questions = questionDao.findByUserId(session['userId'])
+    user = userDao.findById(session['userId'])
+    return render_template('pages/questions.html', questions=questions, user=user)
+
 

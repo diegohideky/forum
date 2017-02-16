@@ -19,3 +19,7 @@ def find():
 def findById(id):
     return Question.query.get(id)
 
+
+def findByUserId(id):
+    return db.session.query(Question).filter(Question.user_id==id).order_by(Question.datetime.desc()).all()
+

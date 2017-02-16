@@ -87,6 +87,24 @@ def answer_question(id):
     return answerController.insert(id, request)
 
 
+@app.route('/answer/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def answer_edit(id):
+    return answerController.edit(id, request)
+
+
+@app.route('/answer/delete/<int:id>')
+@login_required
+def answer_delete(id):
+    return answerController.delete(id)
+
+
+@app.route('/my-questions')
+@login_required
+def my_questions():
+    return questionController.myQuestions()
+
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     print('App rodando em 127.0.0.1:5000')
